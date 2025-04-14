@@ -216,4 +216,4 @@ Te recomiendo hacer estos ejercicios para que puedas entender un poco mas y lo p
 - [ ] Usa `git push -u origin main` para subir tu repo
 - [ ] Modifica algo desde GitHub (web) y usa `git pull` para traerlo localmente
 
-**Puedes utilizar este repo para hacer las practicas, por defecto ya viene un html con el cual puedes practicar. Ya sea que clones este repositorio o lo descargues con zip**
+**Puedes utilizar este repo para hacer las practicas, por defecto ya viene un html con el cual puedes practicar. Ya sea que clones este repositorio o lo descargues con ZIP. Incluso si lo prefieres, puedes hacer un fork :)**
