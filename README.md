@@ -172,6 +172,42 @@ git pull                                 # Traer cambios del remoto
 
 ---
 
+## 😨 Problemas frecuentes al desarrollar.
+
+| 🧩 Problema | 🛠️ Solución | 💬 Explicación rápida |
+|------------|-------------|------------------------|
+| Me equivoqué de rama al hacer commit, quiero conservar los cambios | `git reset --soft HEAD~1` | Quita el último commit pero mantiene los cambios listos para re-commitear |
+| Quiero deshacer el último commit pero seguir editando los archivos | `git reset --mixed HEAD~1` | Borra el commit y saca los archivos del staging |
+| Quiero borrar el commit y todo lo que cambié | `git reset --hard HEAD~1` | ⚠️ Elimina commit y archivos modificados sin recuperación |
+| Subí un commit por error y quiero quitarlo del repo | `git reset --hard HEAD~1` + `git push --force` | ⚠️ Reescribe el historial remoto, cuidado en equipos |
+| Quiero revertir cambios de un commit sin borrarlo | `git revert <id>` | Crea un nuevo commit que revierte otro, ideal para colaborar |
+| Quiero que mi repo local esté igual al remoto | `git fetch origin` + `git reset --hard origin/main` | Borra todo localmente y clona desde el remoto |
+
+---
+
+## 💡 ProTip: Evita hacer commit en ramas protegidas
+
+Puedes crear un alias para asegurarte de no hacer commits por error en ramas importantes como `main`, `master` o `dev`.
+
+```bash
+git config --global alias.safe-commit '!f() { \
+branch=$(git rev-parse --abbrev-ref HEAD); \
+if [ "$branch" = "main" ] || [ "$branch" = "master" ] || [ "$branch" = "dev" ]; then \
+echo "Estás en la rama protegida: $branch"; \
+read -p "¿Estás seguro de que quieres hacer commit? (y/n): " response; \
+if [ "$response" != "y" ]; then \
+echo "Commit cancelado."; \
+exit 1; \
+fi; \
+fi; \
+git commit "$@"; \
+}; f'
+```
+
+> Luego, usa `git safe-commit` en lugar de `git commit` para tener esa protección.
+
+---
+
 ## 🚫 .gitignore
 
 Evita subir cosas como contraseñas, logs o carpetas pesadas.
