@@ -109,6 +109,7 @@ git stash           # Guarda los cambios temporalmente
 git stash list      # Lista de stashes guardados
 git stash apply     # Aplica sin borrar
 git stash pop       # Aplica y elimina el stash
+git stash push --include-untracked -m "Tu mensaje descriptivo" # PRO 😎 (si necesitas guardar todo (archivos creados, modificados, etc.) para guardar tu progreso y cambiar de rama si necesitas hacer cambios)
 ```
 > Útil cuando tienes cambios pero necesitas cambiar de rama o trabajar en otra cosa sin perder el progreso.
 
