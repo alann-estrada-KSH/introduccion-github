@@ -208,6 +208,37 @@ git commit "$@"; \
 
 > Luego, usa `git safe-commit` en lugar de `git commit` para tener esa protección.
 
+¿No quieres usar safe-commit para enviarlo? No te preocupes, en la consola de git ejecuta:
+
+``` bash
+nano .git/hooks/pre-push
+```
+
+🧬 Pega esto:
+
+```bash
+#!/bin/bash
+
+# Ramas que NO deben recibir push directo
+protected_branches=("develop" "main" "master" "release")
+
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+for branch in "${protected_branches[@]}"; do
+  if [[ "$current_branch" == "$branch" ]]; then
+    echo "⛔ Push a '$branch' bloqueado por políticas locales. Usa un PR mejor."
+    exit 1
+  fi
+done
+```
+
+🔐 Paso 2: Dale permisos 
+
+```
+chmod +x .git/hooks/pre-push
+```
+
+> Y listo, siempre que hagas un push a esas ramas te dará error antes de crear un desastre. (Es una buena practica crear nuevas ramas para cada funcionalidad) 😎
 ---
 
 ## 🚫 .gitignore
